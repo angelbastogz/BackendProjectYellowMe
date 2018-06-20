@@ -1,5 +1,3 @@
-HOST: http://localhost:3000/api/v1/
-
 # BackendProjectYellowMe
 
 Project to apply to a job at the company YellowMe.
@@ -16,6 +14,7 @@ Requeriments: Rails 5.2.0, Ruby 2.5.1
     + rails s
 + Now your project is already running
 
+##### HOST: http://localhost:3000/api/v1/
 
 ## Urls Collection [/urls]
 
