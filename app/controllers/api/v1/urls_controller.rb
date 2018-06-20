@@ -1,9 +1,10 @@
 class Api::V1::UrlsController < ApplicationController
+include UrlsHelper
 
   def generate_shorter_url
     url_original = params[:url]
     puts url_original
-    path = "http://localhost:3000/api/v1/"
+    path = get_path
 
     #if the parameter is null render error
     if url_original.nil?
@@ -12,6 +13,8 @@ class Api::V1::UrlsController < ApplicationController
       #Convert parameter to lowercase to avoid repeated data
       url_original = url_original.downcase
 
+      #If the url does not exist, generate a code and save it
+      # else return its data
       if !Url.exists?(original: url_original)
         url = Url.new
         url.original = url_original
@@ -27,9 +30,12 @@ class Api::V1::UrlsController < ApplicationController
         render json: {status: :ok, generated_url: path+url.generated_code}
       end
     end
+
   end
 
   private
+
+  #returns a randomly generated code
   def generate_code
     number = 6
 
