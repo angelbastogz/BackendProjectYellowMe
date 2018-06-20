@@ -2,7 +2,7 @@ class Api::V1::UrlsController < ApplicationController
   include UrlsHelper, EventMachine
 
   def index
-    urls = Url.all.select("id, original, generated_code")
+    urls = Url.all.select("id, original, generated_url")
     render json: {status: :ok, urls: urls}
   end
 
@@ -25,13 +25,13 @@ class Api::V1::UrlsController < ApplicationController
         url.original = url_original
 
         if url.save
-          render json: {status: :ok, generated_url: path+url.generated_code}
+          render json: {status: :ok, generated_url: url.generated_url}
         else
           render json: {status: :unprocessable_entity}
         end
       else
         url = Url.find_by(original: url_original)
-        render json: {status: :ok, generated_url: path+url.generated_code}
+        render json: {status: :ok, generated_url: url.generated_url}
       end
     end
   end

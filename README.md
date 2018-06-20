@@ -29,17 +29,17 @@ Requeriments: Rails 5.2.0, Ruby 2.5.1
                             {
                                 "id": 1,
                                 "original": "https://reddit.com",
-                                "generated_code": "sy22xL"
+                                "generated_url": "http://localhost:3000/api/v1/sy22xL"
                             },
                             {
                                 "id": 2,
                                 "original": "https://facebook.com",
-                                "generated_code": "Bi0l2t"
+                                "generated_url": "http://localhost:3000/api/v1/Bi0l2t"
                             },
                             {
                                 "id": 3,
                                 "original": "https://instagram.com",
-                                "generated_code": "oebnsO"
+                                "generated_url": "http://localhost:3000/api/v1/oebnsO"
                             },
                     ]
             }

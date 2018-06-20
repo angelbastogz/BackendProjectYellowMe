@@ -1,4 +1,5 @@
 class Url < ApplicationRecord
+  include UrlsHelper
   validates :original, :generated_code, presence: true
 
   before_validation :generate_unique_code
@@ -9,6 +10,7 @@ class Url < ApplicationRecord
     end while Url.exists?(generated_code: generated_code)
 
     self.generated_code = generated_code
+    self.generated_url = get_path+generated_code
   end
 
   #returns a randomly generated code
