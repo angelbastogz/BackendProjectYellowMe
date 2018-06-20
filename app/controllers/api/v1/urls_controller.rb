@@ -1,6 +1,11 @@
 class Api::V1::UrlsController < ApplicationController
   include UrlsHelper, EventMachine
 
+  def index
+    urls = Url.all.select("id, original, generated_code")
+    render json: {status: :ok, urls: urls}
+  end
+
   #POST api/v1/generate
   def generate_shorter_url
     url_original = params[:url]
