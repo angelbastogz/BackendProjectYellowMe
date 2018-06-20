@@ -5,16 +5,28 @@ class Api::V1::UrlsController < ApplicationController
     puts url_original
     path = "http://localhost:3000/api/v1/"
 
-    url = Url.new
-    url.original = url_original
-    url.generated_code = generate_code
-
-    if url.save
-      render json: {status: :ok, generated_url: path+url.generated_code}
-    else
+    #if the parameter is null render error
+    if url_original.nil?
       render json: {status: :unprocessable_entity}
-    end
+    else
+      #Convert parameter to lowercase to avoid repeated data
+      url_original = url_original.downcase
 
+      if !Url.exists?(original: url_original)
+        url = Url.new
+        url.original = url_original
+        url.generated_code = generate_code
+
+        if url.save
+          render json: {status: :ok, generated_url: path+url.generated_code}
+        else
+          render json: {status: :unprocessable_entity}
+        end
+      else
+        url = Url.find_by(original: url_original)
+        render json: {status: :ok, generated_url: path+url.generated_code}
+      end
+    end
   end
 
   private
