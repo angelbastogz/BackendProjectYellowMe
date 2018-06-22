@@ -2,7 +2,7 @@ class Api::V1::UrlsController < ApplicationController
   include UrlsHelper, EventMachine
 
   def index
-    urls = Url.all.select("id, original, generated_url")
+    urls = Url.all.select("id, original, generated_url", "generated_code", "id")
     render json: {status: :ok, urls: urls}
   end
 
